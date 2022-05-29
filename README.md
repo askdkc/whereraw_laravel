@@ -1,6 +1,6 @@
 ## This is demo code to show whereRaw optional array handling error
 
-This project uses PostgreSQL and [PGroonga](https://pgroonga.github.io).
+This project uses PostgreSQL and [PGroonga](https://pgroonga.github.io). Please install both to continue.
 
 If you are using macOS, you can install PGroonga with brew.
 ```
