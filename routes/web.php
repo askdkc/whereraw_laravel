@@ -27,10 +27,9 @@ Route::get('/opt', function () {
 
 Route::get('/woopt', function () {
     $query = Post::query();
-    $input = 'cat alice';
-    $query->whereRaw('jsonbdata &` ?', [
-        '(paths @ "title" || paths @ "body") && query("string", "'. addslashes($input) .'")'
-    ]);
+
+    //PGroonga Way
+    $query->whereRaw('jsonbdata &` (\'(paths @ "title" || paths @ "body") && query("string", \' || pgroonga_escape(?) || \')\')', ["cat alice"]);
     $posts = $query->orderBy('id')->paginate(5);
     return view('result', compact('posts'));
 })->name('withoptional');
