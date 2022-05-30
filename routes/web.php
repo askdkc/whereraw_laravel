@@ -27,7 +27,10 @@ Route::get('/opt', function () {
 
 Route::get('/woopt', function () {
     $query = Post::query();
-    $query->whereRaw('jsonbdata &` \'(paths @ "title" || paths @ "body") && query("string", "?")\'', ["cat alice"]); 
+    $input = 'cat alice';
+    $query->whereRaw('jsonbdata &` ?', [
+        '(paths @ "title" || paths @ "body") && query("string", "'. addslashes($input) .'")'
+    ]);
     $posts = $query->orderBy('id')->paginate(5);
     return view('result', compact('posts'));
 })->name('withoptional');
