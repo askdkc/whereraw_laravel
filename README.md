@@ -32,10 +32,10 @@ Click "Without Optional" -> Works fine.
 
 Click "With Optional" -> SQLSTATE[08P01]: <<Unknown error>>.
 
-
+<br><br>
 ## Got 2 solutions for this
 
-I got 2 solutions from PGroonga Collaborator and Laravel Community.
+I got 2 solutions. One from PGroonga Collaborator and other from Laravel Community.
 
 ### PGroonga Way
 
