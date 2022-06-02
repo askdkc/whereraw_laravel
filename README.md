@@ -24,6 +24,8 @@ PostgreSQL DB用意
 
 設定ファイルテンプレコピー
 % cp -p .env.example .env
+% vi .env
+→ DB_USERNAMEとDB_PASSWORDを自環境に応じて変えてください
 
 Laravelパッケージインストール
 % composer install
