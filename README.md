@@ -31,6 +31,8 @@ Laravelパッケージインストール
 % composer install
 
 % php artisan key:generate
+
+DBのマイグレーションとダミーデータの流し込みをします
 % php artisan migrate --seed
 
 % php artisan serve
