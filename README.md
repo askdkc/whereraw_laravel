@@ -24,11 +24,15 @@ PostgreSQL DB用意
 
 設定ファイルテンプレコピー
 % cp -p .env.example .env
+% vi .env
+→ DB_USERNAMEとDB_PASSWORDを自環境に応じて変えてください
 
 Laravelパッケージインストール
 % composer install
 
 % php artisan key:generate
+
+DBのマイグレーションとダミーデータの流し込みをします
 % php artisan migrate --seed
 
 % php artisan serve
