@@ -27,7 +27,7 @@ Route::get('/opt', function () {
 
 Route::get('/woopt', function () {
     $query = Post::query();
-    $query->orWhereRaw('jsonbdata &` \'(paths @ "title" || paths @ "author" || paths @ "body") && query("string", "ジョバンニ OR お魚 OR 銀河")\''); 
+    $query->orWhereRaw('jsonbdata &` \'query("string", "ジョバンニ OR お魚 OR 銀河") && query("paths", "title OR author OR body")\''); 
     $posts = $query->paginate(15);
     return view('result', compact('posts'));
 })->name('withoptional');
@@ -41,7 +41,7 @@ Route::get('/sortopt', function () {
 
 Route::get('/sortwoopt', function () {
     $query = Post::query();
-    $query->orWhereRaw('jsonbdata &` \'(paths @ "title" || paths @ "author" || paths @ "body") && query("string", "ジョバンニ OR お魚 OR 銀河")\''); 
+    $query->orWhereRaw('jsonbdata &` \'query("string", "ジョバンニ OR お魚 OR 銀河") && query("paths", "title OR author OR body")\''); 
     $posts = $query->orderBy('dataid')->paginate(15);
     return view('result', compact('posts'));
 })->name('sortwoopt');
