@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('uniqueid')->storedAs("dbkey || '_' || dataid")->unique();
 
             // Create PGroonga Extension for PostgreSQL
-            DB::statement("CREATE EXTENSION pgroonga;");
+            DB::statement("CREATE EXTENSION IF NOT EXISTS pgroonga");
 
             // Create PGroonga INDEX
             $table->index([
