@@ -27,8 +27,10 @@ Route::get('/opt', function () {
 
 Route::get('/woopt', function () {
     $query = Post::query();
-    $query->orWhereRaw('jsonbdata &` \'query("string", "ジョバンニ OR お魚 OR 銀河") && query("paths", "title OR author OR body")\''); 
-    $posts = $query->paginate(15);
+
+    //PGroonga Way
+    $query->whereRaw('jsonbdata &` (\'(paths @ "title" || paths @ "body") && query("string", \' || pgroonga_escape(?) || \')\')', ["cat alice"]);
+    $posts = $query->orderBy('id')->paginate(5);
     return view('result', compact('posts'));
 })->name('withoptional');
 
