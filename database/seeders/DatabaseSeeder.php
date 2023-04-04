@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Post;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $posts = \App\Models\Post::factory()->count(1000)->create();
+        echo "少々お待ちください。5分程度かかります \n";
+        
+        for($i =0; $i<2000; $i++)
+        {
+            Post::factory()->count(100)->create();
+        }
     }
 }

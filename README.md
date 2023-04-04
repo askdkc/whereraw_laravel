@@ -1,60 +1,53 @@
-## This is demo code to show whereRaw optional array handling error
+## PGroongaでOR検索が遅いデモ
 
-This project uses PostgreSQL and [PGroonga](https://pgroonga.github.io). Please install both to continue.
-
-If you are using macOS, you can install PGroonga with brew.
+PGroongaを使うので、macOSはbrewでインストールしておいてください
 ```
 % brew install pgroonga
 ```
 
-## Install and Reproduce the error
+## このリポジトリのインストールと使い方
 
-Clone this repo and do following.
+以下の手順を実行願います
 
 ```
+このリポジトリのクローン
+% git clone git@github.com:askdkc/whereraw_laravel.git
+
+ディレクトリへ移動
+% cd whereraw_laravel
+
+ブランチの切り替え
+% git checkout or-search-speed
+
+PostgreSQL DB用意
 % createdb whereraw_laravel
 
+設定ファイルテンプレコピー
 % cp -p .env.example .env
+% vi .env
+→ DB_USERNAMEとDB_PASSWORDを自環境に応じて変えてください
 
+Laravelパッケージインストール
 % composer install
 
 % php artisan key:generate
+
+DBのマイグレーションとダミーデータの流し込みをします
 % php artisan migrate --seed
 
 % php artisan serve
 ```
 
 ## Demo
-Access http://127.0.0.1:8000
+ブラウザでこちらのURLにアクセス→ http://127.0.0.1:8000
 
-Click "Without Optional" -> Works fine.
+- JSONB検索項目指定無し 速い
 
+- JSONB検索項目指定有り(title, body)  遅い(上の約2倍かかる)
 
-Click "With Optional" -> SQLSTATE[08P01]: <<Unknown error>>.
+- JSONB検索項目指定無し(sort有り) 速い
 
-<br><br>
-## Got 2 solutions for this
+- JSONB検索項目指定有り(title, body) (sort有り)  遅い(上の約2倍かかる)
 
-I got 2 solutions. One from PGroonga Collaborator and other from Laravel Community.
-
-### PGroonga Way
-
-I got this solution via [Twitter](https://twitter.com/ktou/status/1531114276207079426).
-```
-$query->whereRaw('jsonbdata &` (\'(paths @ "title" || paths @ "body") && query("string", \' || pgroonga_escape(?) || \')\')', ["cat alice"]);
-```
-Check out [this branch](https://github.com/askdkc/whereraw_laravel/tree/pgroonga-way).
-
-
-### Laravel/PHP Way
-
-I got this solution from Laravel [issue report](https://github.com/laravel/framework/issues/42557) which I posted.
-
-```
-$input = 'cat alice';
-$query->whereRaw('jsonbdata &` ?', [
-    '(paths @ "title" || paths @ "body") && query("string", "'. addslashes($input) .'")'
-    ]);
-```
-Check out [this branch](https://github.com/askdkc/whereraw_laravel/tree/php-laravel-way).
+データ量が増えるごとに検索にかかる時間が増えていき、50万レコード程度で1秒程度かかるようになる
 
