@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table)  {
             $table->id();
             $table->string('dbkey')->index();
             $table->string('dataid')->index();
@@ -24,13 +24,10 @@ return new class extends Migration
             $table->string('uniqueid')->storedAs("dbkey || '_' || dataid")->unique();
 
             // Create PGroonga Extension for PostgreSQL
-            DB::statement("CREATE EXTENSION IF NOT EXISTS pgroonga");
+            DB::statement("CREATE EXTENSION IF NOT EXISTS pgroonga;");
 
             // Create PGroonga INDEX
-            $table->index([
-                DB::raw('jsonbdata pgroonga_jsonb_ops_v2')
-            ], null, 'pgroonga');
-
+            $table->index(['jsonbdata'], 'pgroonga_idx_jsonbdata', 'pgroonga');
         });
     }
 
