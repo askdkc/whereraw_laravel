@@ -17,6 +17,8 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
+            'dbkey' => $this->faker->numerify('####'),
+            'dataid' => $this->faker->numerify('##########'),
             'jsonbdata' => [
                 'title' => $this->faker->realText(10),
                 'author' => $this->faker->name(),

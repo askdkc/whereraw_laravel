@@ -9,10 +9,16 @@
     <body class="antialiased">
             <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 ">
                 <div class="m-2 p-2">
-                    <a href="{{ route('withoutoptional') }}" class="text-lg text-blue-600 underline">Without Optional</a>
+                    <a href="{{ route('withoutoptional') }}" class="text-lg text-blue-600 underline">JSONB検索項目指定無し 速い</a>
                 </div>
                 <div class="m-2 p-2">
-                    <a href="{{ route('withoptional') }}" class="text-lg text-blue-600 underline">With Optional</a>
+                    <a href="{{ route('withoptional') }}" class="text-lg text-blue-600 underline">JSONB検索項目指定有り(title, body) 遅い(上の約2倍かかる)</a>
+                </div>
+                <div class="m-2 p-2">
+                    <a href="{{ route('sortopt') }}" class="text-lg text-blue-600 underline">JSONB検索項目指定無し(sort有り)</a>
+                </div>
+                <div class="m-2 p-2">
+                    <a href="{{ route('sortwoopt') }}" class="text-lg text-blue-600 underline">JSONB検索項目指定有り(title, body) (sort有り)</a>
                 </div>
             </div>
     </body>
