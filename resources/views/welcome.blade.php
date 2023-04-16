@@ -14,12 +14,6 @@
                 <div class="m-2 p-2">
                     <a href="{{ route('withoptional') }}" class="text-lg text-blue-600 underline">JSONB検索項目指定有り(title, body) 遅い(上の約2倍かかる)</a>
                 </div>
-                <div class="m-2 p-2">
-                    <a href="{{ route('sortopt') }}" class="text-lg text-blue-600 underline">JSONB検索項目指定無し(sort有り)</a>
-                </div>
-                <div class="m-2 p-2">
-                    <a href="{{ route('sortwoopt') }}" class="text-lg text-blue-600 underline">JSONB検索項目指定有り(title, body) (sort有り)</a>
-                </div>
             </div>
     </body>
 </html>
